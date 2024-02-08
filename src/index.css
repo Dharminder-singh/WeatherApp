@@ -1,3 +1,11 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  min-width: 300px;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +13,300 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: rgb(5,78,154);
+  background: rgb(6,86,169);
+  background: linear-gradient(180deg, rgba(6,86,169,1) 3%, rgba(7,234,243,1) 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/***************Global styling******************/
+
+header , footer , main>.sidebar, .TodayWeather , .Wind_humidity, .forcast {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 9px;
+  background: rgba( 255, 255, 255, 0.1 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 10px );
+  border-radius: 10px;
+  position: relative;
+  transition: all .5s;
+}
+
+header .Title{
+  font-size: 2em;
+  text-transform: uppercase;
+  margin: 10px auto;
+  filter: drop-shadow(5px 5px 5px #393939);
+  position: relative;
+  z-index: 2;
+  color: #fff ;
+  letter-spacing: 3px;
+}
+
+footer .fTitle{
+  font-size: 1em;
+  text-transform: capitalize;
+  margin: 10px auto;
+  filter: drop-shadow(5px 5px 5px #393939);
+  position: relative;
+  z-index: 2;
+  color: #fff;
+}
+
+footer .fTitle span{
+  font-weight: 300;
+  font-size: 1.01em;
+  text-transform: capitalize;  
+}
+
+main > .sidebar {
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 30px 0 ;
+}
+
+main > .sidebar > ::-webkit-scrollbar {
+  display: none; /*hiding scrollbar*/
+}
+
+form{
+  width: 100%;
+  padding: 10px;
+}
+.citySearch{
+  width: 100%;
+  height: 35px;
+  margin: 5px 0;
+  border-radius: 10px;
+  padding:4px 10px;
+  color: #292828;
+  outline: none;
+  border: none;
+  transition: all .5s;
+  background: rgba( 255, 255, 255, 1 );
+  box-shadow: inset 0px 0px 5px 2px rgb(111 110 110 / 81%);
+  backdrop-filter: blur( 2px );
+  -webkit-backdrop-filter: blur( 2px );
+  letter-spacing: 1.2px;
+  font-weight: 100;
+}
+.citySearch::placeholder{
+  color: #292828;
+}
+
+.citySearch:focus-visible{
+    box-shadow: 0px 0px 5px 2px rgb(111 110 110 / 81%);
+    transform: scale(1.02);
+}
+.resultBox{
+  width: 100%;
+  color: #fff;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  max-height: 500px;
+  overflow: scroll;
+  position: absolute;
+  top: 90px;
+  background: #0a9ccc;
+  z-index: 2;
+}
+
+.resultBox ul{
+  width: 100%;
+  list-style: none;
+  display: block;
+}
+.resultBox ul li{
+  width: 100%;
+  color: #fff;
+  outline: none;
+  border-radius: 10px;
+  padding:4px 20px;
+  margin: auto;
+  margin-bottom: 5px;
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 10px );
+  font-size: 1.2em;
+}
+.resultBox ul li span{
+  font-size: .7em;
+}
+.resultBox ul li:hover{
+  background-color: rgb(4, 114, 168);
+  color: #fff;
+}
+.recentCity{
+  width: 100%;
+  color: #fff;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  padding:10px;
+  overflow: scroll;
+}
+.recentCity ul{
+  width: 100%;
+  list-style: none;
+}
+.recentCity ul li{
+  width: 100%;
+  color: #fff;
+  outline: none;
+  border-radius: 10px;
+  padding:4px 20px;
+  margin: auto;
+  margin-bottom: 5px;
+  backdrop-filter: blur( 10px );
+  font-size: 1.2em;
+  position: relative;
+}
+.recentCity ul li span{
+  font-size: .8em;
+}
+.recentCity ul li p{
+  cursor: pointer;
+}
+.recentCity ul li .delbutton{
+    font-size: 1.2em;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: rotate(45deg);
+    text-align: center;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #fff;
+}
+.weathercontainer{
+  width: 100%;
+}
+.weathercontainer > ::-webkit-scrollbar {
+  display: none;
+}
+.wrapper{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+
+}
+.wrapper h2{
+  font-size: 2em;
+  color: #fff;
+  filter: drop-shadow(5px 5px 5px #393939);
+}
+.wrapper img{
+  filter: drop-shadow(5px 5px 5px #393939);
+}
+.wrapper h3 , .wrapper p{
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 100;
+  filter: drop-shadow(5px 5px 5px #393939);
+  position: relative;
+  bottom: 5px;
+}
+.wind, .humidity{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 30px;
+  margin: 30px;
+}
+
+/*************Forecast Styling*****************/
+
+.forcast img{
+  width: 60%;
+}
+.forcast .wrapper span{
+  color: #fff;
+  font-size: 1em;
+  font-weight: 100;
+  filter: drop-shadow(5px 5px 5px #393939);
+  position: relative;
+  bottom: 5px;
+}
+.Wind_humidity .wrapper {
+  align-items: flex-start;
+}
+.weekforcast ul{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.TodayWeather:hover , .Wind_humidity:hover , .forcast:hover{
+  transform: scale(1.03);
+}
+
+.TodayWeather >.wrapper{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+
+}
+.TodayWeather >.wrapper img{
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+/*****************desktop Style ********************/
+
+@media screen and (min-width: 900px) {
+  main>.sidebar{
+    width: 27%;
+    height: 77.3vh
+  }
+  body{
+    height: auto;
+  }
+  main{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .weathercontainer{
+    width: 100%;
+    height: 79.9vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* overflow: overlay; */
+  }
+  .TodayWeather{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    
+  }
+  .Wind_humidity{
+    grid-column-start: 2;
+    grid-column-end: 3;
+  }
+  .weekforcast{
+    margin: 0;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+  .weekforcast ul{
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+    height: 100%;
+    justify-items: center;
+    margin: auto;
+    width: 98%;
+  }
+  .forcast{
+    width: 100%;
+  }
 }
