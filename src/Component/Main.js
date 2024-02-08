@@ -30,15 +30,17 @@ const Main = () =>{
     const day4 = getWeekDay(Date4)
     const day5 = getWeekDay(Date5)
     const [Weather, setWeather] = useState(JSON.parse(localStorage.getItem('Recentweather')) || [])
-
-    const fetchItems = (city) =>{
-        const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&cnt=40&appid=25af674f7bf77755ab4c79cc57509d96&units=metric`
-        fetch(weatherUrl)
-        .then((response) => response.json())
-        .then((json) =>{
-            setWeather([json])
-            localStorage.setItem('Recentweather', JSON.stringify([json]))
-        });
+    
+    const fetchItems = async (city) =>{
+    const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&cnt=40&appid=25af674f7bf77755ab4c79cc57509d96&units=metric`
+       try{
+        const response = await fetch(weatherUrl)
+        if(!response.ok) throw Error('Weather for This city Not found')
+        const data = await response.json()
+        setWeather([data])
+        }catch (error){
+        alert(error.message);
+    }
     }
     
     const currentCity = (city) =>{

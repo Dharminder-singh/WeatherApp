@@ -10,36 +10,15 @@ const Aside = ({currentCity, setWeather}) => {
     const [SearchCity, SetSearchCity] = useState('')
     const [recentItem , setRecentItem] = useState(JSON.parse(localStorage.getItem('RecentCities')) || [])
 
-    // const Cities_API_Url = "https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json"
-    
-    // var headers = new Headers();
-
-    // headers.append("X-CSCAPI-KEY", "YWdtR3VmUXl6NEpGQWVwMHgzNFFSQmdIalZtdEtZNGR4eGZUdmh0dA==");
-
-    // var requestOptions = {
-    // method: 'GET',
-    // headers: headers,
-    // redirect: 'follow'
-    // };
-
-    // const fetchItems = useCallback(()=>{
-    //         fetch("https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/cities.json")
-    //         .then((response) => response.json())
-    //         .then((json) =>{
-    //             setItems(json)
-    //         });
-        
-    // },[])
-
-    
     useEffect( ()=>{
         const fetchItems = () =>{
         
             fetch("https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/cities.json")
             .then((response) => response.json())
-            .then((json) =>{
-                setItems(json)
-            });
+            .then((json) =>{ setItems(json)})
+            .catch(error => {
+                console.log(error);
+            })
         }
         fetchItems();
     },[SearchCity])
@@ -61,7 +40,7 @@ const Aside = ({currentCity, setWeather}) => {
     const additem = (value)=>{
         const mynewItem = cityname.find( item => item.id === value)
         const newcity = [mynewItem]
-        if(recentItem.map(item => item.geonameid).includes(Number(newcity.map(item => item.id)))){ 
+        if(recentItem.map(item => item.id).includes(Number(newcity.map(item => item.id)))){ 
             SetSearchCity('')
             setCityName([])
         }else{
@@ -90,7 +69,7 @@ const Aside = ({currentCity, setWeather}) => {
         <>
         <aside className="sidebar">
                     <form onSubmit={(e)=> e.preventDefault() }>
-                    <input className="citySearch" id="searchinput" type="text" placeholder="Search Your City" autoComplete='off'  onChange={(e) => SetSearchCity(e.target.value)} />
+                    <input className="citySearch" id="searchinput" type="text" placeholder="Search Your City" autoComplete='off' value={SearchCity}  onChange={(e) => SetSearchCity(e.target.value)} />
                     </form>
                     <div className='resultBox'>
                         <ul>
