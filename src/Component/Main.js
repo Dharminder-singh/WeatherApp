@@ -38,6 +38,7 @@ const Main = () =>{
         if(!response.ok) throw Error('Weather for This city Not found')
         const data = await response.json()
         setWeather([data])
+        localStorage.setItem('Recentweather', JSON.stringify([data]))
         }catch (error){
         alert(error.message);
     }
