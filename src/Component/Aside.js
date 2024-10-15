@@ -35,18 +35,18 @@ const Aside = ({currentCity, setWeather}) => {
     },[SearchCity])
 
     
-    useMemo(()=>{ 
+    // useMemo(()=>{ 
         
-        if(SearchCity.length >=3){
+    //     if(SearchCity.length >=3){
             
-            const result = items.filter((city) => {
-                return city && city.name && city.name.toLowerCase().includes(SearchCity.toLowerCase())
-                });
-            setCityName(result)
-        }else{
-            setCityName([])
-        }
-    },[items, SearchCity])
+    //         const result = items.filter((city) => {
+    //             return city && city.name && city.name.toLowerCase().includes(SearchCity.toLowerCase())
+    //             });
+    //         setCityName(result)
+    //     }else{
+    //         setCityName([])
+    //     }
+    // },[items, SearchCity])
 
     const additem = (value)=>{
         const mynewItem = cityname.find( item => item.city === value)
