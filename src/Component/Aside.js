@@ -11,18 +11,26 @@ const Aside = ({currentCity, setWeather}) => {
     const [recentItem , setRecentItem] = useState(JSON.parse(localStorage.getItem('RecentCities')) || [])
 
     useEffect( ()=>{
-        const fetchItems = () =>{
-        
-            fetch("https://countriesnow.space/api/v0.1/countries/population/cities")
-            .then((response) => response.json())
-            .then((json) =>{ setItems(json)
-                            console.log(json)
-                })
-            .catch((error) => {
-                console.log(error);
+        fetch("https://countriesnow.space/api/v0.1/countries/population/cities")
+        .then((response) => response.json())
+        .then((json) => {
+          let mydata = json;
+
+          if (SearchCity.length >= 3) {
+            const result = mydata.data.filter(city =>{
+              return city.city.toLowerCase().includes(SearchCity.toLowerCase())
             })
-        }
-        fetchItems();
+            setCityName(result);
+            console.log(result)
+          } else {
+            setCityName([]);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    fetchItems();
     },[SearchCity])
 
     
@@ -40,13 +48,13 @@ const Aside = ({currentCity, setWeather}) => {
     },[items, SearchCity])
 
     const additem = (value)=>{
-        const mynewItem = cityname.find( item => item.id === value)
+        const mynewItem = cityname.find( item => item.city === value)
         const newcity = [mynewItem]
-        if(recentItem.map(item => item.id).includes(Number(newcity.map(item => item.id)))){ 
+        if(recentItem.map(item => item.city).includes(Number(newcity.map(item => item.city)))){ 
             SetSearchCity('')
             setCityName([])
         }else{
-            currentCity(mynewItem.name)
+            currentCity(mynewItem.city)
             const recentcitys = [...recentItem, mynewItem]
             setRecentItem(recentcitys)
             localStorage.setItem('RecentCities', JSON.stringify(recentcitys))
@@ -57,7 +65,7 @@ const Aside = ({currentCity, setWeather}) => {
     }
 
     const ItemDelete = (id) =>{
-        const ListItems = recentItem.filter((Item) => Item.id !== id);
+        const ListItems = recentItem.filter((Item) => Item.city !== city);
         setRecentItem(ListItems)
         localStorage.setItem('RecentCities' , JSON.stringify(ListItems))
         
@@ -76,8 +84,8 @@ const Aside = ({currentCity, setWeather}) => {
                     <div className='resultBox'>
                         <ul>
                             {cityname.map((item, index) =>(
-                                <li key={index} value={item.name}onClick={() => additem(item.id)} >{item.name}
-                                <br /><span>{item.state_name} , {item.country_name}</span>
+                                <li key={index} value={item.city}onClick={() => additem(item.city)} >{item.city}
+                                <br /><span>{item.country}</span>
                                 </li>
                             ))}
                         </ul>
