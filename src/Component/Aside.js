@@ -13,7 +13,7 @@ const Aside = ({currentCity, setWeather}) => {
     useEffect( ()=>{
         const fetchItems = () =>{
         
-            fetch("https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/cities.json")
+            fetch("https://countriesnow.space/api/v0.1/countries/population/cities")
             .then((response) => response.json())
             .then((json) =>{ setItems(json)})
             .catch(error => {
