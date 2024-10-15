@@ -65,7 +65,7 @@ const Aside = ({currentCity, setWeather}) => {
         }
     }
 
-    const ItemDelete = (id) =>{
+    const ItemDelete = (city) =>{
         const ListItems = recentItem.filter((Item) => Item.city !== city);
         setRecentItem(ListItems)
         localStorage.setItem('RecentCities' , JSON.stringify(ListItems))
@@ -95,10 +95,10 @@ const Aside = ({currentCity, setWeather}) => {
                         <ul>
                         {recentItem.map((item, index) =>(
                                 <li key={index} >
-                                    <button className='delbutton' onClick={() =>ItemDelete(item.id)}>+</button>
-                                    <p onClick={() => currentCity(item.name)}>
-                                    {item.name}<br/>
-                                    <span>{item.state_name} , {item.country_name}</span>
+                                    <button className='delbutton' onClick={() =>ItemDelete(item.city)}>+</button>
+                                    <p onClick={() => currentCity(item.city)}>
+                                    {item.city}<br/>
+                                    {item.country}</span>
                                     </p>
                                 </li>
                             ))}
