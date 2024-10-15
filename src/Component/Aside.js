@@ -15,8 +15,10 @@ const Aside = ({currentCity, setWeather}) => {
         
             fetch("https://countriesnow.space/api/v0.1/countries/population/cities")
             .then((response) => response.json())
-            .then((json) =>{ setItems(json)})
-            .catch(error => {
+            .then((json) =>{ setItems(json)
+                            console.log(json)
+                })
+            .catch((error) => {
                 console.log(error);
             })
         }
