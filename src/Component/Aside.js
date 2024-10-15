@@ -98,6 +98,7 @@ const Aside = ({currentCity, setWeather}) => {
                                     <button className='delbutton' onClick={() =>ItemDelete(item.city)}>+</button>
                                     <p onClick={() => currentCity(item.city)}>
                                     {item.city}<br/>
+                                    <span>   
                                     {item.country}</span>
                                     </p>
                                 </li>
