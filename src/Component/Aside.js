@@ -11,6 +11,7 @@ const Aside = ({currentCity, setWeather}) => {
     const [recentItem , setRecentItem] = useState(JSON.parse(localStorage.getItem('RecentCities')) || [])
 
     useEffect( ()=>{
+        const fetchItems = () => {
         fetch("https://countriesnow.space/api/v0.1/countries/population/cities")
         .then((response) => response.json())
         .then((json) => {
