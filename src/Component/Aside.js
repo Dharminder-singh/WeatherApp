@@ -1,11 +1,7 @@
-import { useState, useEffect, useMemo } from 'react' ;
-
-
-
+import { useState, useEffect } from 'react' ;
 
 const Aside = ({currentCity, setWeather}) => {
 
-    const [items , setItems] = useState([])
     const [cityname , setCityName] = useState([])
     const [SearchCity, SetSearchCity] = useState('')
     const [recentItem , setRecentItem] = useState(JSON.parse(localStorage.getItem('RecentCities')) || [])
