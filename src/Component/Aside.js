@@ -47,7 +47,7 @@ const Aside = ({currentCity, setWeather}) => {
     const additem = (value)=>{
         const mynewItem = cityname.find( item => item.city === value)
         const newcity = [mynewItem]
-        if(recentItem.map(item => item.city).includes(Number(newcity.map(item => item.city)))){ 
+        if(recentItem.map(item => item.city).includes(newcity.map(item => item.city))){ 
             SetSearchCity('')
             setCityName([])
         }else{
